@@ -1,75 +1,68 @@
 ---
-# You can also start simply with 'default'
 theme: bricks
-# random image from a curated Unsplash collection by Anthony
-# like them? see https://unsplash.com/collections/94734566/slidev
 background: https://cover.sli.dev
-# some information about your slides (markdown enabled)
-title: Welcome to Slidev
-info: |
-  ## Slidev Starter Template
-  Presentation slides for developers.
-
-  Learn more at [Sli.dev](https://sli.dev)
-# apply unocss classes to the current slide
+title: Create a custom toggle switch
 class: text-center
-# https://sli.dev/features/drawing
 drawings:
   persist: false
-# slide transition: https://sli.dev/guide/animations.html#slide-transitions
 transition: slide-left
-# enable MDC Syntax: https://sli.dev/features/mdc
 mdc: true
+fonts:
+  serif: Yusei Magic
+  mono: Fira Code
 ---
 
-# Welcome to Slidev
+# 自作トグルスイッチ
 
-Presentation slides for developers
-
-<div class="pt-12">
-  <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
-    Press Space for next page <carbon:arrow-right class="inline"/>
-  </span>
-</div>
-
-<div class="abs-br m-6 flex gap-2">
-  <button @click="$slidev.nav.openInEditor()" title="Open in Editor" class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
-    <carbon:edit />
-  </button>
-  <a href="https://github.com/slidevjs/slidev" target="_blank" alt="GitHub" title="Open in GitHub"
-    class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
-    <carbon-logo-github />
-  </a>
-</div>
+Create a custom toggle switch
 
 <!--
-The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
+speaker note
 -->
 
 ---
 transition: fade-out
 ---
 
-# What is Slidev?
+# 自己紹介
 
-Slidev is a slides maker and presenter designed for developers, consist of the following features
+- 🏢 **会社**
+  - 株式会社ラクス / フロントエンドエンジニア
+- 🧑‍💻 **名前**
+  - 亀ノ上 孝雄
+- 🐰 **アカウント**
+  - ととかるちょ(とと) / totocalcio
+- 🦎 **ペット**
+  - うさぎ、フトアゴヒゲトカゲ、ヒョウモンリクガメ
+- 🐢 **一言**
+  - CSS見てる時が一番落ち着く
 
-- 📝 **Text-based** - focus on the content with Markdown, and then style them later
-- 🎨 **Themable** - themes can be shared and re-used as npm packages
-- 🧑‍💻 **Developer Friendly** - code highlighting, live coding with autocompletion
-- 🤹 **Interactive** - embed Vue components to enhance your expressions
-- 🎥 **Recording** - built-in recording and camera view
-- 📤 **Portable** - export to PDF, PPTX, PNGs, or even a hostable SPA
-- 🛠 **Hackable** - virtually anything that's possible on a webpage is possible in Slidev
-  <br>
-  <br>
-
-Read more about [Why Slidev?](https://sli.dev/guide/why)
-
-<!--
-You can have `style` tag in markdown to override the style for the current page.
-Learn more: https://sli.dev/features/slide-scope-style
--->
+<div class="absolute right-20 top-30 grid grid-cols-3 gap-4">
+  <figure class="h-33 aspect-ratio-square overflow-hidden rounded-full">
+    <img
+      class="w-100 h-full object-cover object-top"
+      src="/assets/images/ginchan.jpg"
+      alt="うさぎのぎんちゃんが小松菜を食べている"
+    />
+    <figcaption class="w-33 absolute top-33 text-center text-blue-700">ぎん</figcaption>
+  </figure>
+  <figure class="h-33 aspect-ratio-square overflow-hidden rounded-full">
+    <img
+      class="w-100 h-50 object-cover image-juzo"
+      src="/assets/images/juzo.jpg"
+      alt="フトアゴヒゲトカゲのじゅうぞうがカメラ目線で見ている"
+    />
+    <figcaption class="w-33 absolute top-33 text-center text-blue-700">じゅうぞう</figcaption>
+  </figure>
+  <figure class="h-33 aspect-ratio-square overflow-hidden rounded-full">
+    <img
+      class="w-100 h-50 object-cover image-kanta"
+      src="/assets/images/kanta.jpg"
+      alt="ヒョウモンリクガメのかんたが少し上を見ている"
+    />
+    <figcaption class="w-33 absolute top-33 text-center text-blue-700">かんた</figcaption>
+  </figure>
+</div>
 
 <style>
 h1 {
@@ -81,569 +74,466 @@ h1 {
   -webkit-text-fill-color: transparent;
   -moz-text-fill-color: transparent;
 }
+.image-juzo {
+  object-position: left -1rem top -1rem;
+}
+.image-kanta {
+  object-position: left -2.5rem top 0;
+}
 </style>
 
 <!--
-Here is another comment.
+speaker note
 -->
 
 ---
 transition: slide-up
 level: 2
+layout: image
+image: /assets/images/vuefes2024.png
+backgroundSize: contain
 ---
 
-# Navigation
-
-Hover on the bottom-left corner to see the navigation's controls panel, [learn more](https://sli.dev/guide/navigation.html)
-
-## Keyboard Shortcuts
-
-|                                                    |                             |
-| -------------------------------------------------- | --------------------------- |
-| <kbd>right</kbd> / <kbd>space</kbd>                | next animation or slide     |
-| <kbd>left</kbd> / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
-| <kbd>up</kbd>                                      | previous slide              |
-| <kbd>down</kbd>                                    | next slide                  |
-
-<!-- https://sli.dev/guide/animations.html#click-animation -->
-
-<img
-  v-click
-  class="absolute -bottom-9 -left-7 w-80 opacity-50"
-  src="https://sli.dev/assets/arrow-bottom-left.svg"
-  alt=""
-/>
-
-<p v-after class="absolute bottom-23 left-45 opacity-30 transform -rotate-10">Here!</p>
-
----
-layout: two-cols
-layoutClass: gap-16
----
-
-# Table of contents
-
-You can use the `Toc` component to generate a table of contents for your slides:
-
-```html
-<Toc minDepth="1" maxDepth="1"></Toc>
-```
-
-The title will be inferred from your slide content, or you can override it with `title` and `level` in your frontmatter.
-
-::right::
-
-<Toc v-click minDepth="1" maxDepth="2"></Toc>
-
----
-layout: image-right
-image: https://cover.sli.dev
----
-
-# Code
-
-Use code snippets and get the highlighting directly, and even types hover![^1]
-
-```ts {all|5|7|7-8|10|all} twoslash
-// TwoSlash enables TypeScript hover information
-// and errors in markdown code blocks
-// More at https://shiki.style/packages/twoslash
-
-import { computed, ref } from "vue";
-
-const count = ref(0);
-const doubled = computed(() => count.value * 2);
-
-doubled.value = 2;
-```
-
-<arrow v-click="[4, 5]" x1="350" y1="310" x2="195" y2="334" color="#953" width="2" arrowSize="1" />
-
-<!-- This allow you to embed external code blocks -->
-
-<<< @/snippets/external.ts#snippet
-
-<!-- Footer -->
-
-[^1]: [Learn More](https://sli.dev/guide/line-highlighting)
-
-<!-- Inline style -->
-<style>
-.footnotes-sep {
-  @apply mt-5 opacity-10;
-}
-.footnotes {
-  @apply text-sm opacity-75;
-}
-.footnote-backref {
-  display: none;
-}
-</style>
+<span v-mark.circle.red="1" class="absolute top-5 right-12 w-12 h-8" aria-hidden="true"></span>
 
 <!--
-Notes can also sync with clicks
-
-[click] This will be highlighted after the first click
-
-[click] Highlighted with `count = ref(0)`
-
-[click:3] Last click (skip two clicks)
+speaker note
 -->
 
 ---
-level: 2
----
-
-# Shiki Magic Move
-
-Powered by [shiki-magic-move](https://shiki-magic-move.netlify.app/), Slidev supports animations across multiple code snippets.
-
-Add multiple code blocks and wrap them with <code>````md magic-move</code> (four backticks) to enable the magic move. For example:
-
-````md magic-move {lines: true}
-```ts {*|2|*}
-// step 1
-const author = reactive({
-  name: "John Doe",
-  books: [
-    "Vue 2 - Advanced Guide",
-    "Vue 3 - Basic Guide",
-    "Vue 4 - The Mystery",
-  ],
-});
-```
-
-```ts {*|1-2|3-4|3-4,8}
-// step 2
-export default {
-  data() {
-    return {
-      author: {
-        name: "John Doe",
-        books: [
-          "Vue 2 - Advanced Guide",
-          "Vue 3 - Basic Guide",
-          "Vue 4 - The Mystery",
-        ],
-      },
-    };
-  },
-};
-```
-
-```ts
-// step 3
-export default {
-  data: () => ({
-    author: {
-      name: "John Doe",
-      books: [
-        "Vue 2 - Advanced Guide",
-        "Vue 3 - Basic Guide",
-        "Vue 4 - The Mystery",
-      ],
-    },
-  }),
-};
-```
-
-Non-code blocks are ignored.
-
-```vue
-<!-- step 4 -->
-<script setup>
-const author = {
-  name: "John Doe",
-  books: [
-    "Vue 2 - Advanced Guide",
-    "Vue 3 - Basic Guide",
-    "Vue 4 - The Mystery",
-  ],
-};
-</script>
-```
-````
-
----
-
-# Components
 
 <div grid="~ cols-2 gap-4">
 <div>
 
-You can use Vue components directly inside your slides.
+# 機能
 
-We have provided a few built-in components like `<Tweet/>` and `<Youtube/>` that you can use directly. And adding your custom components is also super easy.
+- クリックする度に言語を切り替えるスイッチ
+- [Nuxt I18n](https://i18n.nuxtjs.org/) を使用する。
 
-```html
-<Counter :count="10" />
-```
+## Nuxt I18n
 
-<!-- ./components/Counter.vue -->
-<Counter :count="10" m="t-4" />
+Vue i18n ベースの Nuxt 用のモジュール
 
-Check out [the guides](https://sli.dev/builtin/components.html) for more.
+- Vue Fes Japan2024の使用方法
+  - URLを`https://example.com/en/sample`のように、`/en/`を付与し、ソースコード内では`$t(title)`のように呼び出す
+  - 別途定義された`json` ファイルを参照して表示
 
 </div>
 <div>
 
-```html
-<Tweet id="1390115482657726468" />
+<img
+  class="mt-8 mb-20"
+  src="/assets/images/feature-toggle.png"
+  alt="トグルスイッチを切り替えるイメージ画像"
+/>
+
+```json
+// ja.json
+{
+  “title”: “タイトル”,
+}
 ```
 
-<Tweet id="1390115482657726468" scale="0.65" />
+```json
+// en.json
+{
+  “title”: “Title”,
+}
+```
+
+```vue
+<h1>{{ $t('title') }}</h1>
+```
 
 </div>
 </div>
 
 <!--
-Presenter note with **bold**, *italic*, and ~~striked~~ text.
-
-Also, HTML elements are valid:
-<div class="flex w-full">
-  <span style="flex-grow: 1;">Left content</span>
-  <span>Right content</span>
-</div>
+speaker note
 -->
 
 ---
-class: px-20
+
+# 実装方針検討
+
+<v-clicks>
+
+- URLが変わるから anchor 要素かな…
+- いや、JavaScriptでパスを書き換えているだけだから、別に画面遷移というわけではないか…
+- ほな、ボタンか…
+- トグルスイッチをボタンかぁ…
+- `<input type="checkbox">` を拡張するか…？
+- `<input type="checkbox">` でスイッチ…
+- <span class="text-red-500">`<input type="checkbox" switch>`</span> !!!
+
+</v-clicks>
+
+<style>
+.slidev-vclick-target {
+  transition-duration: 0.75s;
+}
+</style>
+
+<!--
+speaker note
+-->
+
 ---
 
-# Themes
+# `<input type="checkbox" switch>`
 
-Slidev comes with powerful theming support. Themes can provide styles, layouts, components, or even configurations for tools. Switching between themes by just **one edit** in your frontmatter:
+`checkbox` に `switch` 属性を指定することで、スイッチUIを実現できる標準機能。
 
-<div grid="~ cols-2 gap-2" m="t-2">
+<div grid="~ cols-2 gap-8">
+<div>
 
-```yaml
----
-theme: default
----
-```
-
-```yaml
----
-theme: seriph
----
-```
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-default/01.png?raw=true" alt="">
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-seriph/01.png?raw=true" alt="">
-
+<div class="mt-4">
+  <input type="checkbox" id="lang" switch/>
+  <label for="lang">言語切り替え</label>
 </div>
-
-Read more about [How to use a theme](https://sli.dev/themes/use.html) and
-check out the [Awesome Themes Gallery](https://sli.dev/themes/gallery.html).
-
----
-
-# Clicks Animations
-
-You can add `v-click` to elements to add a click animation.
-
-<div v-click>
-
-This shows up when you click the slide:
 
 ```html
-<div v-click>This shows up when you click the slide.</div>
+<div>
+  <input type="checkbox" id="lang" switch />
+  <label for="lang">言語切り替え</label>
+</div>
 ```
 
 </div>
+<div>
+
+<v-clicks every="2">
+
+<div class="mt-4">
+  <input class="lang-switch" type="checkbox" id="lang-red" switch/>
+  <label for="lang-red">言語切り替え</label>
+</div>
+
+```html
+<div>
+  <input type="checkbox" id="lang" switch />
+  <label for="lang">言語切り替え</label>
+</div>
+<style>
+  input[type="checkbox"][switch] {
+    accent-color: red;
+  }
+</style>
+```
+
+</v-clicks>
+
+</div>
+</div>
+
+<style>
+.lang-switch {
+  accent-color: red;
+}
+</style>
+
+<!--
+speaker note
+-->
+
+---
+layout: quote
+transition: slide-up
+level: 2
+---
+
+<h1 role="generic">やっぱり HTML 標準が考慮も<br>少なくなるし安心だよね😁</h1>
+
+<!--
+speaker note
+-->
+
+---
+layout: fact
+---
+
+<h1 role="generic">がっ……駄目っ……!</h1>
+
+<!--
+speaker note
+-->
+
+---
+layout: image
+image: /assets/images/wpt-switch.png
+backgroundSize: contain
+---
+
+<span v-mark.underline.red="1" class="absolute top-25 left-65 w-62 h-1" aria-hidden="true"></span>
+
+<span v-mark.box.red="2" class="absolute top-68 right-2 w-40 h-50" aria-hidden="true"></span>
+
+<!--
+speaker note
+-->
+
+---
+layout: quote
+transition: slide-up
+level: 2
+---
+
+<h1 role="generic">トグルスイッチをアクセシブルに実装するのはどうすれば<br>いいんだろう？🤔</h1>
+
+<!--
+speaker note
+-->
+
+---
+layout: fact
+---
+
+<h1 role="generic">そういうときはだいたいここ</h1>
+
+<!--
+speaker note
+-->
+
+---
+transition: slide-up
+layout: image
+image: /assets/images/apg.png
+backgroundSize: contain
+---
+
+<div class="visually-hidden">ARIA Authoring Practices Guide トップページのスクリーンショットが背景画像に設定されている</div>
+<span v-mark.circle.red="1" class="absolute top-21 left-30 w-16 h-8" aria-hidden="true"></span>
+
+<!--
+speaker note
+-->
+
+---
+transition: slide-up
+layout: quote
+---
+
+<h1 role="generic">ある</h1>
+
+<img class="mx-auto" src="/assets/images/apg-ss-switch-card.png" alt="ARIA Authoring Practices GuideのPatternページに表示されているSwitchコンポーネントカードのスクリーンショット" >
+
+<!--
+speaker note
+-->
+
+---
+transition: slide-up
+layout: quote
+---
+
+<h1 role="generic">(サンプルコードも)ある</h1>
+
+<img class="mx-auto" src="/assets/images/apg-ss-switch-examples.png" alt="ARIA Authoring Practices GuideのSwitch Patternページに表示されているExamplesのスクリーンショット" >
+
+<!--
+speaker note
+-->
+
+---
+layout: fact
+---
+
+<h1 role="generic">(機能解説も)ある</h1>
+
+<!--
+speaker note
+-->
+
+---
+transition: slide-up
+layout: image
+image: /assets/images/apg-ss-switch-feature.png
+backgroundSize: contain
+---
+
+<div class="visually-hidden">ARIA Authoring Practices Guide Switch Examplesページのアクセシビリティ機能に関する説明のスクリーンショットが背景画像に設定されている</div>
+<span v-mark.underline.red="1" class="absolute top-25 left-150 w-54 h-1" aria-hidden="true"></span>
+<span v-mark.underline.red="1" class="absolute top-29 left-44 w-82 h-1" aria-hidden="true"></span>
+
+<span v-mark.underline.red="1" class="absolute top-38 left-44 w-162 h-1" aria-hidden="true"></span>
+<span v-mark.underline.red="1" class="absolute top-43 left-44 w-51 h-1" aria-hidden="true"></span>
+
+<span v-mark.underline.red="1" class="absolute top-48 left-44 w-162 h-1" aria-hidden="true"></span>
+<span v-mark.underline.red="1" class="absolute top-52 left-44 w-124 h-1" aria-hidden="true"></span>
+
+<span v-mark.underline.red="1" class="absolute top-77 left-44 w-162 h-1" aria-hidden="true"></span>
+<span v-mark.underline.red="1" class="absolute top-81 left-44 w-47 h-1" aria-hidden="true"></span>
+
+<!--
+speaker note
+-->
+
+---
+
+# 意識したこと①
 
 <br>
+<dl>
+<dt class="text-indigo-700 mb-8 text-bold">
+視覚障害や認知障害を持つユーザーがスイッチの状態を理解しやすくするために、状態 (オンまたはオフ) に相当するテキストがグラフィカルな状態インジケーターの隣に表示されます。
+</dt>
+<v-clicks>
+<dd class="list-item ml-4 mb-2" v-motion :initial="{ x: -80 }" :enter="{ x: 0 }" :leave="{ x: 80 }">
+Example ではトグルスイッチのラベルが隣にあって、確かに判断しやすいけど、デザインフェーズの課題なのでスルーする。</dd>
+<dd class="list-item ml-4 mb-2">実際は課題というより、今回のデザインはラベルと一体化しているというものであるので、単純な（ラベルのない）トグルスイッチよりはわかりやすいと思う。</dd>
+<dd class="list-item ml-4 mb-2" v-motion :initial="{ x: -80 }" :enter="{ x: 0 }" :leave="{ x: 80 }">
+このような課題は、デザイン段階でアクセシブルかどうかのチェックが必要だから、デザインレビューであったり、アクセシビリティテストのシフトレフトが話題にあがったりするんだな、と感じた。</dd>
+</v-clicks>
+</dl>
 
-<v-click>
-
-The <span v-mark.red="3"><code>v-mark</code> directive</span>
-also allows you to add
-<span v-mark.circle.orange="4">inline marks</span>
-, powered by [Rough Notation](https://roughnotation.com/):
-
-```html
-<span v-mark.underline.orange>inline markers</span>
-```
-
-</v-click>
-
-<div mt-20 v-click>
-
-[Learn More](https://sli.dev/guide/animations#click-animation)
-
-</div>
+<!--
+speaker note
+-->
 
 ---
 
-# Motions
+# 意識したこと②
 
-Motion animations are powered by [@vueuse/motion](https://motion.vueuse.org/), triggered by `v-motion` directive.
+<br>
+<dl>
+<dt class="text-indigo-700 mb-8 text-bold">
+注:スクリーンリーダーによる状態の冗長なアナウンスを防ぐため、状態のテキストインジケーターはによって支援技術から非表示になっていますaria-hidden。
+</dt>
+<v-clicks>
+<dd class="list-item ml-4 mb-2" v-motion :initial="{ x: -80 }" :enter="{ x: 0 }" :leave="{ x: 80 }">
+たしかにDOMを全部読み上げたらむしろわかりづらい
+</dd>
+<dd class="list-item ml-4 mb-2 text-red-700 text-bold" v-motion :initial="{ x: -80 }" :enter="{ x: 0 }" :leave="{ x: 80 }">
+トグルスイッチであることと、現在の状態が伝われば良い。
+</dd>
+</v-clicks>
+</dl>
+
+<!--
+speaker note
+-->
+
+---
+
+# 意識したこと③
+
+<br>
+<dl>
+<dt class="text-indigo-700 mb-8 text-bold">
+間隔、境界線の幅、塗りつぶしは、ブラウザやオペレーティングシステムの高コントラスト設定が有効になっている場合を含め、視覚障害のある人がグラフィックの状態を視認し、識別できるようにするために重要です。
+</dt>
+<v-clicks>
+<dd class="list-item ml-4 mb-2" v-motion :initial="{ x: -80 }" :enter="{ x: 0 }" :leave="{ x: 80 }">
+初期デザインでは、axeDevtools を実行したところ、コントラスト比に問題があった。
+</dd>
+<dd class="list-item ml-4 mb-2 text-red-700 text-bold" v-motion :initial="{ x: -80 }" :enter="{ x: 0 }" :leave="{ x: 80 }">
+デザイナに報告してなおしてもらった。
+</dd>
+</v-clicks>
+</dl>
+
+<!--
+speaker note
+-->
+
+---
+
+# 意識したこと④
+
+<br>
+<dl>
+<dt class="text-indigo-700 mb-8 text-bold">
+スイッチを操作する際の認識性を高めるために、視覚的なキーボード フォーカスとホバーはCSS:hoverと:focus疑似クラスを使用してスタイル設定されます。
+</dt>
+<v-clicks>
+<dd class="list-item ml-4 mb-2" v-motion :initial="{ x: -80 }" :enter="{ x: 0 }" :leave="{ x: 80 }">
+Exampleページの機能に記載されている、スタイルの課題が全て解決しているわけではないが、少なくともホバー時とフォーカス時でスタイルを設定し、それぞれ認識できるようにはした。
+</dd>
+<dd class="list-item ml-4 mb-2" v-motion :initial="{ x: -80 }" :enter="{ x: 0 }" :leave="{ x: 80 }">
+実務でも実装のタイミングで都度インタラクションの相談することはあるので、最初のデザイン段階で相談して詰めておきたいと、改めて思った。
+</dd>
+</v-clicks>
+</dl>
+
+<!--
+speaker note
+-->
+
+---
+
+# 結果こうなった
+
+<div grid="~ cols-2 gap-8">
+<div>
 
 ```html
-<div
-  v-motion
-  :initial="{ x: -80 }"
-  :enter="{ x: 0 }"
-  :click-3="{ x: 80 }"
-  :leave="{ x: 1000 }"
+<button
+  type="button"
+  role="switch"
+  aria-label="translate english"
+  :aria-checked="isChecked"
+  @click="onSwitch"
 >
-  Slidev
-</div>
-```
-
-<div class="w-60 relative">
-  <div class="relative w-40 h-40">
-    <img
-      v-motion
-      :initial="{ x: 800, y: -100, scale: 1.5, rotate: -50 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-square.png"
-      alt=""
-    />
-    <img
-      v-motion
-      :initial="{ y: 500, x: -100, scale: 2 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-circle.png"
-      alt=""
-    />
-    <img
-      v-motion
-      :initial="{ x: 600, y: 400, scale: 2, rotate: 100 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-triangle.png"
-      alt=""
-    />
-  </div>
-
-  <div
-    class="text-5xl absolute top-14 left-40 text-[#2B90B6] -z-1"
-    v-motion
-    :initial="{ x: -80, opacity: 0}"
-    :enter="{ x: 0, opacity: 1, transition: { delay: 2000, duration: 1000 } }">
-    Slidev
-  </div>
-</div>
-
-<!-- vue script setup scripts can be directly used in markdown, and will only affects current page -->
-<script setup lang="ts">
-const final = {
-  x: 0,
-  y: 0,
-  rotate: 0,
-  scale: 1,
-  transition: {
-    type: 'spring',
-    damping: 10,
-    stiffness: 20,
-    mass: 2
-  }
-}
-</script>
-
-<div
-  v-motion
-  :initial="{ x:35, y: 30, opacity: 0}"
-  :enter="{ y: 0, opacity: 1, transition: { delay: 3500 } }">
-
-[Learn More](https://sli.dev/guide/animations.html#motion)
-
-</div>
-
----
-
-# LaTeX
-
-LaTeX is supported out-of-box. Powered by [KaTeX](https://katex.org/).
-
-<div h-3 />
-
-Inline $\sqrt{3x-1}+(1+x)^2$
-
-Block
-
-$$
-{1|3|all}
-\begin{aligned}
-\nabla \cdot \vec{E} &= \frac{\rho}{\varepsilon_0} \\
-\nabla \cdot \vec{B} &= 0 \\
-\nabla \times \vec{E} &= -\frac{\partial\vec{B}}{\partial t} \\
-\nabla \times \vec{B} &= \mu_0\vec{J} + \mu_0\varepsilon_0\frac{\partial\vec{E}}{\partial t}
-\end{aligned}
-$$
-
-[Learn more](https://sli.dev/features/latex)
-
----
-
-# Diagrams
-
-You can create diagrams / graphs from textual descriptions, directly in your Markdown.
-
-<div class="grid grid-cols-4 gap-5 pt-4 -mb-6">
-
-```mermaid {scale: 0.5, alt: 'A simple sequence diagram'}
-sequenceDiagram
-    Alice->John: Hello John, how are you?
-    Note over Alice,John: A typical interaction
-```
-
-```mermaid {theme: 'neutral', scale: 0.8}
-graph TD
-B[Text] --> C{Decision}
-C -->|One| D[Result 1]
-C -->|Two| E[Result 2]
-```
-
-```mermaid
-mindmap
-  root((mindmap))
-    Origins
-      Long history
-      ::icon(fa fa-book)
-      Popularisation
-        British popular psychology author Tony Buzan
-    Research
-      On effectiveness<br/>and features
-      On Automatic creation
-        Uses
-            Creative techniques
-            Strategic planning
-            Argument mapping
-    Tools
-      Pen and paper
-      Mermaid
-```
-
-```plantuml {scale: 0.7}
-@startuml
-
-package "Some Group" {
-  HTTP - [First Component]
-  [Another Component]
-}
-
-node "Other Groups" {
-  FTP - [Second Component]
-  [First Component] --> FTP
-}
-
-cloud {
-  [Example 1]
-}
-
-database "MySql" {
-  folder "This is my folder" {
-    [Folder 3]
-  }
-  frame "Foo" {
-    [Frame 4]
-  }
-}
-
-[Another Component] --> [Example 1]
-[Example 1] --> [Folder 3]
-[Folder 3] --> [Frame 4]
-
-@enduml
+  ...
+</button>
 ```
 
 </div>
+<div>
 
-Learn More: [Mermaid Diagrams](https://sli.dev/guide/features/mermaid) and [PlantUML Diagrams](https://sli.dev/guide/features/plantuml)
+<figure>
+<img src="/assets/images/swich-aom.png" alt="switchコンポーネントのAOM" >
+</figure>
 
----
-foo: bar
-dragPos:
-  square: 691,32,167,_,-16
----
+</div>
+</div>
 
-# Draggable Elements
+<Arrow x1="210" y1="182" x2="530" y2="396" />
+<Arrow x1="330" y1="200" x2="550" y2="310" />
+<Arrow x1="300" y1="220" x2="530" y2="460" />
 
-Double-click on the draggable elements to edit their positions.
-
-<br>
-
-###### Directive Usage
-
-```md
-<img v-drag="'square'" src="https://sli.dev/logo.png">
-```
-
-<br>
-
-###### Component Usage
-
-```md
-<v-drag text-3xl>
-  <carbon:arrow-up />
-  Use the `v-drag` component to have a draggable container!
-</v-drag>
-```
-
-<v-drag pos="663,206,261,_,-15">
-  <div text-center text-3xl border border-main rounded>
-    Double-click me!
-  </div>
-</v-drag>
-
-<img v-drag="'square'" src="https://sli.dev/logo.png">
-
-###### Draggable Arrow
-
-```md
-<v-drag-arrow two-way />
-```
-
-<v-drag-arrow pos="67,452,253,46" two-way op70 />
-
----
-src: ./pages/imported-slides.md
-hide: false
----
+<!--
+speaker note
+-->
 
 ---
 
-# Monaco Editor
+# まとめ
 
-Slidev provides built-in Monaco Editor support.
+<v-clicks>
 
-Add `{monaco}` to the code block to turn it into an editor:
+- HTML標準要素ではないコンポーネントを開発する際に、ARIA Authoring Practices Guide (APG)を参考にした。
+  - 改めて見直すとまだ調整したいところがある。
+  - 自身の課題として、今後活かしていきたい。
+- <span class="text-bold">Vue Fes Japan 2024 は 2024/10/19 開催。チケット販売中。</span>
+  - このスライドも `Vue.js`で作成されています。
 
-```ts {monaco}
-import { ref } from "vue";
-import { emptyArray } from "./external";
+</v-clicks>
 
-const arr = ref(emptyArray(10));
-```
+<div v-after class="mt-6">
 
-Use `{monaco-run}` to create an editor that can execute the code directly in the slide:
+<h2 class="mb-4">参考</h2>
 
-```ts {monaco-run}
-import { version } from "vue";
-import { emptyArray, sayHello } from "./external";
+- [ARIA Authoring Practices Guide (APG)](https://www.w3.org/WAI/ARIA/apg/)
+- [Vue Fes Japan 2024](https://vuefes.jp/2024/)
 
-sayHello();
-console.log(`vue ${version}`);
-console.log(
-  emptyArray<number>(10).reduce(
-    (fib) => [...fib, fib.at(-1)! + fib.at(-2)!],
-    [1, 1],
-  ),
-);
-```
+</div>
+
+<!--
+speaker note
+-->
 
 ---
-layout: center
+layout: statement
 class: text-center
 ---
 
-# Learn More
+# ありがとうございました
 
-[Documentation](https://sli.dev) · [GitHub](https://github.com/slidevjs/slidev) · [Showcases](https://sli.dev/showcases.html)
+<TheSwitch />
 
 <PoweredBySlidev mt-10 />
+
+<!--
+speaker note
+-->
