@@ -27,7 +27,9 @@ transition: fade-out
 # 自己紹介
 
 - 🏢 **会社**
-  - 株式会社ラクス / フロントエンドエンジニア
+  - 株式会社ラクス
+- 👔 **職種**
+  - フロントエンドエンジニア
 - 🧑‍💻 **名前**
   - 亀ノ上 孝雄
 - 🐰 **アカウント**
@@ -41,7 +43,7 @@ transition: fade-out
   <figure class="h-33 aspect-ratio-square overflow-hidden rounded-full">
     <img
       class="w-100 h-full object-cover object-top"
-      src="/assets/images/ginchan.jpg"
+      src="/public/images/ginchan.jpg"
       alt="うさぎのぎんちゃんが小松菜を食べている"
     />
     <figcaption class="w-33 absolute top-33 text-center text-blue-700">ぎん</figcaption>
@@ -49,7 +51,7 @@ transition: fade-out
   <figure class="h-33 aspect-ratio-square overflow-hidden rounded-full">
     <img
       class="w-100 h-50 object-cover image-juzo"
-      src="/assets/images/juzo.jpg"
+      src="/public/images/juzo.jpg"
       alt="フトアゴヒゲトカゲのじゅうぞうがカメラ目線で見ている"
     />
     <figcaption class="w-33 absolute top-33 text-center text-blue-700">じゅうぞう</figcaption>
@@ -57,7 +59,7 @@ transition: fade-out
   <figure class="h-33 aspect-ratio-square overflow-hidden rounded-full">
     <img
       class="w-100 h-50 object-cover image-kanta"
-      src="/assets/images/kanta.jpg"
+      src="/public/images/kanta.jpg"
       alt="ヒョウモンリクガメのかんたが少し上を見ている"
     />
     <figcaption class="w-33 absolute top-33 text-center text-blue-700">かんた</figcaption>
@@ -90,7 +92,7 @@ speaker note
 transition: slide-up
 level: 2
 layout: image
-image: /assets/images/vuefes2024.png
+image: /public/images/vuefes2024.png
 backgroundSize: contain
 ---
 
@@ -123,7 +125,7 @@ Vue i18n ベースの Nuxt 用のモジュール
 
 <img
   class="mt-8 mb-20"
-  src="/assets/images/feature-toggle.png"
+  src="/public/images/feature-toggle.png"
   alt="トグルスイッチを切り替えるイメージ画像"
 />
 
@@ -260,7 +262,7 @@ speaker note
 
 ---
 layout: image
-image: /assets/images/wpt-switch.png
+image: /public/images/wpt-switch.png
 backgroundSize: contain
 ---
 
@@ -297,7 +299,7 @@ speaker note
 ---
 transition: slide-up
 layout: image
-image: /assets/images/apg.png
+image: /public/images/apg.png
 backgroundSize: contain
 ---
 
@@ -315,7 +317,7 @@ layout: quote
 
 <h1 role="generic">ある</h1>
 
-<img class="mx-auto" src="/assets/images/apg-ss-switch-card.png" alt="ARIA Authoring Practices GuideのPatternページに表示されているSwitchコンポーネントカードのスクリーンショット" >
+<img class="mx-auto" src="/public/images/apg-ss-switch-card.png" alt="ARIA Authoring Practices GuideのPatternページに表示されているSwitchコンポーネントカードのスクリーンショット" >
 
 <!--
 speaker note
@@ -328,7 +330,7 @@ layout: quote
 
 <h1 role="generic">(サンプルコードも)ある</h1>
 
-<img class="mx-auto" src="/assets/images/apg-ss-switch-examples.png" alt="ARIA Authoring Practices GuideのSwitch Patternページに表示されているExamplesのスクリーンショット" >
+<img class="mx-auto" src="/public/images/apg-ss-switch-examples.png" alt="ARIA Authoring Practices GuideのSwitch Patternページに表示されているExamplesのスクリーンショット" >
 
 <!--
 speaker note
@@ -347,7 +349,7 @@ speaker note
 ---
 transition: slide-up
 layout: image
-image: /assets/images/apg-ss-switch-feature.png
+image: /public/images/apg-ss-switch-feature.png
 backgroundSize: contain
 ---
 
@@ -482,7 +484,7 @@ speaker note
 <div>
 
 <figure>
-<img src="/assets/images/swich-aom.png" alt="switchコンポーネントのAOM" >
+<img src="/public/images/swich-aom.png" alt="switchコンポーネントのAOM" >
 </figure>
 
 </div>
