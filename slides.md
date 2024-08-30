@@ -1,7 +1,7 @@
 ---
 theme: bricks
 background: https://cover.sli.dev
-title: Create a custom toggle switch
+title: Create accessible a toggle switch
 class: text-center
 drawings:
   persist: false
@@ -12,12 +12,12 @@ fonts:
   mono: Fira Code
 ---
 
-# 自作トグルスイッチ
+# アクセシブルな<br>トグルスイッチを作る
 
-Create a custom toggle switch
+Create accessible a toggle switch
 
 <!--
-speaker note
+アクセシブルなトグルスイッチを作るという内容で発表を致します。
 -->
 
 ---
@@ -37,7 +37,7 @@ transition: fade-out
 - 🦎 **ペット**
   - うさぎ、フトアゴヒゲトカゲ、ヒョウモンリクガメ
 - 🐢 **一言**
-  - CSS見てる時が一番落ち着く
+  - 好きなCSS関数はcolor-mix()
 
 <div class="absolute right-20 top-30 grid grid-cols-3 gap-4">
   <figure class="h-33 aspect-ratio-square overflow-hidden rounded-full">
@@ -85,7 +85,8 @@ h1 {
 </style>
 
 <!--
-speaker note
+まずは簡単に自己紹介をさせていただきます。
+(自己紹介する)
 -->
 
 ---
@@ -99,7 +100,10 @@ backgroundSize: contain
 <span v-mark.circle.red="1" class="absolute top-5 right-12 w-12 h-8" aria-hidden="true"></span>
 
 <!--
-speaker note
+突然ですが、今年１０月２４日、大手町でVueFesJapan2024が開催されます。
+私はVue.js日本ユーザーグループに所属していて、今年はWebサイトチームでサイト制作に携わっています。
+今回の発表内容は、アクセシブルなトグルスイッチを作る。ですが、
+実際に開発したこちら(→)のトグルスイッチについて話そうと思います。
 -->
 
 ---
@@ -109,7 +113,7 @@ speaker note
 
 # 機能
 
-- クリックする度に言語を切り替えるスイッチ
+- クリック（Enter or Space）する度に言語を切り替えるスイッチ
 - [Nuxt I18n](https://i18n.nuxtjs.org/) を使用する。
 
 ## Nuxt I18n
@@ -151,7 +155,20 @@ Vue i18n ベースの Nuxt 用のモジュール
 </div>
 
 <!--
-speaker note
+軽く機能要件についてお話します。ちなみにこのあたりの細かい使用方法は今回のアクセシブルなトグルスイッチとはあまり関係がないので、
+そうなんだな、くらいで思っておいていただければ大丈夫です。
+
+機能としては、クリックする度に言語を切り替えるスイッチとなっています。
+もちろんキーボード操作も受け付けます。
+切り替えにはNuxtI18nのモジュールを使用します。
+
+NuxtI118nについて簡単に説明すると、
+Vue i18nベースのNuxt用のモジュールとなっています。
+
+VueFesJapan2024の使用方法としては、
+言語を切り替える際に、URLに/en/ のパスを付与し、
+ソースコード内では$t(title)のように呼び出します。
+そして、別途定義されたjsonファイルを参照して表示します。
 -->
 
 ---
@@ -177,7 +194,14 @@ speaker note
 </style>
 
 <!--
-speaker note
+さて、ここから実装方針について検討します。
+- URLが変わるから anchor 要素かな…
+- いや、JavaScriptでパスを書き換えているだけだから、別に画面遷移というわけではないか…
+- ほな、ボタンか…
+- トグルスイッチをボタンかぁ…
+- じゃあcheckbox を拡張するか…？
+- checkbox でスイッチ…
+- そうだ！checkbox switch
 -->
 
 ---
@@ -235,7 +259,15 @@ speaker note
 </style>
 
 <!--
-speaker note
+と、いうことで、checkboxのswitch属性の紹介です。
+
+checkboxにswitch属性を指定することで、スイッチUIを実現できるブラウザの標準機能です。
+
+(こんな感じ)
+
+(→）
+
+標準機能なのでaccent-colorプロパティで色を変えたりもできます。
 -->
 
 ---
@@ -247,7 +279,7 @@ level: 2
 <h1 role="generic">やっぱり HTML 標準が考慮も<br>少なくなるし安心だよね😁</h1>
 
 <!--
-speaker note
+やっぱりHTML標準が考慮も少なくなるし安心だよね
 -->
 
 ---
@@ -257,7 +289,7 @@ layout: fact
 <h1 role="generic">がっ……駄目っ……!</h1>
 
 <!--
-speaker note
+が、だめ！
 -->
 
 ---
@@ -271,7 +303,12 @@ backgroundSize: contain
 <span v-mark.box.red="2" class="absolute top-68 right-2 w-40 h-50" aria-hidden="true"></span>
 
 <!--
-speaker note
+こちらWeb Platform Testsのダッシュボードのサイトで、ブラウザ機能のテスト状況を知ることができます。
+
+今見えているキャプチャは（→）checkboxのswitch属性のテストに関するページですが、
+(→)SafariしかテストをPassしていません。
+
+つまり、モダンブラウザで使用するにはまだ早すぎるということで別の実装方法を考えなければいけません。
 -->
 
 ---
@@ -283,7 +320,7 @@ level: 2
 <h1 role="generic">トグルスイッチをアクセシブルに実装するのはどうすれば<br>いいんだろう？🤔</h1>
 
 <!--
-speaker note
+では、トグルスイッチをアクセシブルに実装するにはどうすればいいんだろう。
 -->
 
 ---
@@ -293,7 +330,7 @@ layout: fact
 <h1 role="generic">そういうときはだいたいここ</h1>
 
 <!--
-speaker note
+そういうときはだいたいここをみます
 -->
 
 ---
@@ -307,7 +344,13 @@ backgroundSize: contain
 <span v-mark.circle.red="1" class="absolute top-21 left-30 w-16 h-8" aria-hidden="true"></span>
 
 <!--
-speaker note
+ARIA Authoring Practices Guideです
+
+(→)
+
+ナビゲーションのPatternsから、switchのパターンがないか探してみます。
+
+そして、結論から言うと、
 -->
 
 ---
@@ -320,7 +363,7 @@ layout: quote
 <img class="mx-auto" src="/images/apg-ss-switch-card.png" alt="ARIA Authoring Practices GuideのPatternページに表示されているSwitchコンポーネントカードのスクリーンショット" >
 
 <!--
-speaker note
+あります。
 -->
 
 ---
@@ -333,7 +376,7 @@ layout: quote
 <img class="mx-auto" src="/images/apg-ss-switch-examples.png" alt="ARIA Authoring Practices GuideのSwitch Patternページに表示されているExamplesのスクリーンショット" >
 
 <!--
-speaker note
+サンプルコードもあります。
 -->
 
 ---
@@ -343,7 +386,7 @@ layout: fact
 <h1 role="generic">(機能解説も)ある</h1>
 
 <!--
-speaker note
+解説もあります。
 -->
 
 ---
@@ -367,7 +410,11 @@ backgroundSize: contain
 <span v-mark.underline.red="1" class="absolute top-81 left-44 w-47 h-1" aria-hidden="true"></span>
 
 <!--
-speaker note
+今回こちらのswitchの例を参考に実装していきたいと思います。
+
+（→）
+
+例として、具体的にこのあたりを確認していきます。
 -->
 
 ---
@@ -382,14 +429,20 @@ speaker note
 <v-clicks>
 <dd class="list-item ml-4 mb-2" v-motion :initial="{ x: -80 }" :enter="{ x: 0 }" :leave="{ x: 80 }">
 Example ではトグルスイッチのラベルが隣にあって、確かに判断しやすいけど、デザインフェーズの課題なのでスルーする。</dd>
-<dd class="list-item ml-4 mb-2">実際は課題というより、今回のデザインはラベルと一体化しているというものであるので、単純な（ラベルのない）トグルスイッチよりはわかりやすいと思う。</dd>
+<dd class="list-item ml-4 mb-2" v-motion :initial="{ x: -80 }" :enter="{ x: 0 }" :leave="{ x: 80 }">実際は課題というより、今回のVueFesのデザインはラベルと一体化しているというものであるので、単純な（ラベルのない）トグルスイッチよりはわかりやすいと思う。</dd>
 <dd class="list-item ml-4 mb-2" v-motion :initial="{ x: -80 }" :enter="{ x: 0 }" :leave="{ x: 80 }">
 このような課題は、デザイン段階でアクセシブルかどうかのチェックが必要だから、デザインレビューであったり、アクセシビリティテストのシフトレフトが話題にあがったりするんだな、と感じた。</dd>
 </v-clicks>
 </dl>
 
 <!--
-speaker note
+意識したこと１です。
+
+視覚障害や認知障害を持つユーザーがスイッチの状態を理解しやすくするために、状態 (オンまたはオフ) に相当するテキストがグラフィカルな状態インジケーターの隣に表示されます。
+
+ちなみにgoogleの自動翻訳そのままなので日本語がへんなところがあります。
+
+（あとは一つずつ読む）
 -->
 
 ---
@@ -403,7 +456,7 @@ speaker note
 </dt>
 <v-clicks>
 <dd class="list-item ml-4 mb-2" v-motion :initial="{ x: -80 }" :enter="{ x: 0 }" :leave="{ x: 80 }">
-たしかにDOMを全部読み上げたらむしろわかりづらい
+たしかにラベルやチェック状態等を全部読み上げていたらわかりづらいかもしれない。
 </dd>
 <dd class="list-item ml-4 mb-2 text-red-700 text-bold" v-motion :initial="{ x: -80 }" :enter="{ x: 0 }" :leave="{ x: 80 }">
 トグルスイッチであることと、現在の状態が伝われば良い。
@@ -412,7 +465,11 @@ speaker note
 </dl>
 
 <!--
-speaker note
+意識したこと２です。
+
+注:スクリーンリーダーによる状態の冗長なアナウンスを防ぐため、状態のテキストインジケーターはによって支援技術から非表示になっていますaria-hidden。
+
+（一つずつ読む）
 -->
 
 ---
@@ -435,7 +492,11 @@ speaker note
 </dl>
 
 <!--
-speaker note
+意識したこと３です。
+
+間隔、境界線の幅、塗りつぶしは、ブラウザやオペレーティングシステムの高コントラスト設定が有効になっている場合を含め、視覚障害のある人がグラフィックの状態を視認し、識別できるようにするために重要です。
+
+（一つずつ読む）
 -->
 
 ---
@@ -452,13 +513,17 @@ speaker note
 Exampleページの機能に記載されている、スタイルの課題が全て解決しているわけではないが、少なくともホバー時とフォーカス時でスタイルを設定し、それぞれ認識できるようにはした。
 </dd>
 <dd class="list-item ml-4 mb-2" v-motion :initial="{ x: -80 }" :enter="{ x: 0 }" :leave="{ x: 80 }">
-実務でも実装のタイミングで都度インタラクションの相談することはあるので、最初のデザイン段階で相談して詰めておきたいと、改めて思った。
+実務でも、実装のタイミングで都度インタラクションの相談することはあるので、最初のデザイン段階で相談して詰めておきたいと、改めて思った。
 </dd>
 </v-clicks>
 </dl>
 
 <!--
-speaker note
+意識したこと４です。
+
+スイッチを操作する際の認識性を高めるために、視覚的なキーボード フォーカスとホバーはCSS:hoverと:focus疑似クラスを使用してスタイル設定されます。
+
+（一つずつ読む）
 -->
 
 ---
@@ -495,7 +560,9 @@ speaker note
 <Arrow x1="300" y1="220" x2="530" y2="460" />
 
 <!--
-speaker note
+そして、これらを踏まえてこのような実装になりました。
+
+roleにはswitchを指定、aria-labelには"translate english"、aria-checkedにチェック状態を定義することで、現在の言語状態がわかるように実装しました。
 -->
 
 ---
@@ -522,7 +589,14 @@ speaker note
 </div>
 
 <!--
-speaker note
+まとめです。
+
+HTML標準要素ではないコンポーネントを開発する際に、ARIA Authoring Practices Guide (APG)を参考にしたという話をしました。
+改めて見直すとまだ調整したいところがありますが、自身の課題として、今後活かしていきたいです。 もしも、アンチパターンを踏んでいたり、よりよい実装方法にお気づきの方は、懇親会やX上でも教えて下さい。
+
+また冒頭でもお伝えしましたが、VueFesJapan2024は
+10月19日開催で、チケット販売中です。Vue.jsわからない方でもお祭り感楽しめると思いますし、なんならVue.js/Nuxtのハンズオンもあるので、Vue.js初心者の方でも楽しめるコンテンツがあります。  
+このスライドもVue.jsで作成されています。
 -->
 
 ---
@@ -537,5 +611,5 @@ class: text-center
 <PoweredBySlidev mt-10 />
 
 <!--
-speaker note
+以上、ありがとうございました。
 -->
