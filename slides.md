@@ -276,7 +276,7 @@ transition: slide-up
 level: 2
 ---
 
-<h1 role="generic">やっぱり HTML 標準が考慮も<br>少なくなるし安心だよね😁</h1>
+# やっぱり HTML 標準が考慮も<br>少なくなるし安心だよね😁
 
 <!--
 やっぱりHTML標準が考慮も少なくなるし安心だよね
@@ -286,7 +286,7 @@ level: 2
 layout: fact
 ---
 
-<h1 role="generic">がっ……駄目っ……!</h1>
+# がっ……駄目っ……!
 
 <!--
 が、だめ！
@@ -317,7 +317,7 @@ transition: slide-up
 level: 2
 ---
 
-<h1 role="generic">トグルスイッチをアクセシブルに実装するのはどうすれば<br>いいんだろう？🤔</h1>
+# トグルスイッチをアクセシブルに実装するのはどうすれば<br>いいんだろう？🤔
 
 <!--
 では、トグルスイッチをアクセシブルに実装するにはどうすればいいんだろう。
@@ -327,7 +327,7 @@ level: 2
 layout: fact
 ---
 
-<h1 role="generic">そういうときはだいたいここ</h1>
+# そういうときはだいたいここ
 
 <!--
 そういうときはだいたいここをみます
@@ -358,7 +358,7 @@ transition: slide-up
 layout: quote
 ---
 
-<h1 role="generic">ある</h1>
+# ある
 
 <img class="mx-auto" src="/images/apg-ss-switch-card.png" alt="ARIA Authoring Practices GuideのPatternページに表示されているSwitchコンポーネントカードのスクリーンショット" >
 
@@ -371,7 +371,7 @@ transition: slide-up
 layout: quote
 ---
 
-<h1 role="generic">(サンプルコードも)ある</h1>
+# (サンプルコードも)ある
 
 <img class="mx-auto" src="/images/apg-ss-switch-examples.png" alt="ARIA Authoring Practices GuideのSwitch Patternページに表示されているExamplesのスクリーンショット" >
 
@@ -383,7 +383,7 @@ layout: quote
 layout: fact
 ---
 
-<h1 role="generic">(機能解説も)ある</h1>
+# (機能解説も)ある
 
 <!--
 解説もあります。
@@ -595,7 +595,7 @@ HTML標準要素ではないコンポーネントを開発する際に、ARIA Au
 改めて見直すとまだ調整したいところがありますが、自身の課題として、今後活かしていきたいです。 もしも、アンチパターンを踏んでいたり、よりよい実装方法にお気づきの方は、懇親会やX上でも教えて下さい。
 
 また冒頭でもお伝えしましたが、VueFesJapan2024は
-10月19日開催で、チケット販売中です。Vue.jsわからない方でもお祭り感楽しめると思いますし、なんならVue.js/Nuxtのハンズオンもあるので、Vue.js初心者の方でも楽しめるコンテンツがあります。  
+10月19日開催で、チケット販売中です。Vue.jsわからない方でもお祭り感楽しめると思いますし、なんならVue.js/Nuxtのハンズオンもあるので、Vue.js初心者の方でも楽しめるコンテンツがあります。
 このスライドもVue.jsで作成されています。
 -->
 
