@@ -16,6 +16,23 @@ fonts:
 
 Create accessible a toggle switch
 
+<div class="pt-12">
+  <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
+    Press Space for next page <carbon:arrow-right class="inline"/>
+  </span>
+</div>
+
+<div class="abs-br m-6 flex gap-2">
+  <a href="https://twitter.com/dir20634" target="_blank" alt="X" title="Open in X"
+    class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-gray600">
+    <carbon-logo-x />
+  </a>
+  <a href="https://github.com/totocalcio/slidev" target="_blank" alt="GitHub" title="Open in GitHub"
+    class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-gray600">
+    <carbon-logo-github />
+  </a>
+</div>
+
 <!--
 アクセシブルなトグルスイッチを作るという内容で発表を致します。
 -->
