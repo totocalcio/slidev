@@ -24,7 +24,7 @@ Create accessible a toggle switch
 transition: fade-out
 ---
 
-# 自己紹介
+<h1 class="flex flex-items-center gap-4"><img class="h-14 rounded-full" src="/images/avatar.jpg" alt="totocalcio アバター" >自己紹介</h1>
 
 - 🏢 **会社**
   - 株式会社ラクス
