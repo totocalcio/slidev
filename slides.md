@@ -1,26 +1,14 @@
 ---
-theme: bricks
-background: https://cover.sli.dev
-title: Create accessible a toggle switch
+title: "CSSカルーセル"
+subtitle: "～CSS Overflow Module Level 5～"
+author: "@totocalcio"
+theme: seriph
+layout: center
 class: text-center
-drawings:
-  persist: false
-transition: slide-left
-mdc: true
-fonts:
-  serif: Yusei Magic
-  mono: Fira Code
 ---
 
-# アクセシブルな<br>トグルスイッチを作る
-
-Create accessible a toggle switch
-
-<div class="pt-12">
-  <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
-    Press Space for next page <carbon:arrow-right class="inline"/>
-  </span>
-</div>
+# CSSカルーセル
+## CSS Overflow Module Level 5
 
 <div class="abs-br m-6 flex gap-2">
   <a href="https://twitter.com/dir20634" target="_blank" alt="X" title="Open in X"
@@ -34,11 +22,10 @@ Create accessible a toggle switch
 </div>
 
 <!--
-アクセシブルなトグルスイッチを作るという内容で発表を致します。
 -->
 
 ---
-transition: fade-out
+transition: fade
 ---
 
 <h1 class="flex flex-items-center gap-4"><img class="h-14 rounded-full" src="/images/avatar.jpg" alt="totocalcio アバター" >自己紹介</h1>
@@ -54,7 +41,7 @@ transition: fade-out
 - 🦎 **ペット**
   - うさぎ、フトアゴヒゲトカゲ、ヒョウモンリクガメ
 - 🐢 **一言**
-  - 好きなCSS関数はcolor-mix()
+  - 好きなCSS関数はcolor-mix()（一年前と一緒）
 
 <div class="absolute right-20 top-30 grid grid-cols-3 gap-4">
   <figure class="h-33 aspect-ratio-square overflow-hidden rounded-full">
@@ -109,524 +96,445 @@ h1 {
 ---
 transition: slide-up
 level: 2
-layout: image
-image: /images/vuefes2024.png
-backgroundSize: contain
 ---
 
-<span v-mark.circle.red="1" class="absolute top-5 right-12 w-12 h-8" aria-hidden="true"></span>
+## 今日話すこと
 
-<!--
-突然ですが、今年１０月２４日、大手町でVueFesJapan2024が開催されます。
-私はVue.js日本ユーザーグループに所属していて、今年はWebサイトチームでサイト制作に携わっています。
-今回の発表内容は、アクセシブルなトグルスイッチを作る。ですが、
-実際に開発したこちら(→)のトグルスイッチについて話そうと思います。
--->
+1. CSS Overflow Module Level 5とは？
+2. CSS カルーセルとは？
+3. ブラウザサポート状況
+4. 実装方法
+5. アクセシビリティに関する補足
 
 ---
 
-<div grid="~ cols-2 gap-4">
-<div>
+## CSS Overflow Moduleについて
+- overflowまわりの仕様をまとめたもの
 
-# 機能
+## CSS Overflow Module Level 5とは？
+- スクロールに関する様々な機能が追加された
+  - 擬似要素 `::scroll-button()` や `::scroll-marker()`など
 
-- クリック（Enter or Space）する度に言語を切り替えるスイッチ
-- [Nuxt I18n](https://i18n.nuxtjs.org/) を使用する。
-
-## Nuxt I18n
-
-Vue i18n ベースの Nuxt 用のモジュール
-
-- Vue Fes Japan2024の使用方法
-  - URLを`https://example.com/en/sample`のように、`/en/`を付与し、ソースコード内では`$t(title)`のように呼び出す
-  - 別途定義された`json` ファイルを参照して表示
-
-</div>
-<div>
-
-<img
-  class="mt-8 mb-20"
-  src="/images/feature-toggle.png"
-  alt="トグルスイッチを切り替えるイメージ画像"
-/>
-
-```json
-// ja.json
-{
-  “title”: “タイトル”,
-}
-```
-
-```json
-// en.json
-{
-  “title”: “Title”,
-}
-```
-
-```vue
-<h1>{{ $t('title') }}</h1>
-```
-
-</div>
-</div>
-
-<!--
-軽く機能要件についてお話します。ちなみにこのあたりの細かい使用方法は今回のアクセシブルなトグルスイッチとはあまり関係がないので、
-そうなんだな、くらいで思っておいていただければ大丈夫です。
-
-機能としては、クリックする度に言語を切り替えるスイッチとなっています。
-もちろんキーボード操作も受け付けます。
-切り替えにはNuxtI18nのモジュールを使用します。
-
-NuxtI118nについて簡単に説明すると、
-Vue i18nベースのNuxt用のモジュールとなっています。
-
-VueFesJapan2024の使用方法としては、
-言語を切り替える際に、URLに/en/ のパスを付与し、
-ソースコード内では$t(title)のように呼び出します。
-そして、別途定義されたjsonファイルを参照して表示します。
--->
+> 参考：[CSS Overflow Module Level 5](https://drafts.csswg.org/css-overflow-5/)
 
 ---
 
-# 実装方針検討
+### カルーセルとは？
 
-<v-clicks>
+- よく見かける横スクロールのスライドショーや画像ギャラリーのこと
 
-- URLが変わるから anchor 要素かな…
-- いや、JavaScriptでパスを書き換えているだけだから、別に画面遷移というわけではないか…
-- ほな、ボタンか…
-- トグルスイッチをボタンかぁ…
-- `<input type="checkbox">` を拡張するか…？
-- `<input type="checkbox">` でスイッチ…
-- <span class="text-red-500">`<input type="checkbox" switch>`</span> !!!
+<br />
 
-</v-clicks>
+### カルーセルの構成要素
+- スクロールコンテンツ
+  - コンテンツそのもの
+  - 主にリスト形式で実装される
+- スクロールボタン
+  - 前の要素、次の要素に移動する
+  - 左矢印と右矢印のアイコンで実装されているようなやつ
+- スクロールマーカー
+  - ナビゲーションの役割があり、スクロールコンテンツへアクセスする
+  - 円形インジゲーターのようなやつ
+
+<br />
+
+### CSS カルーセル
+- カルーセルの実装は今まではライブラリを使用したり、JavaScriptを書いたりしていた。
+- それが、**CSSのみで実装できるようになった！**
 
 <style>
-.slidev-vclick-target {
-  transition-duration: 0.75s;
+li {
+  font-size: 1rem
 }
 </style>
 
-<!--
-さて、ここから実装方針について検討します。
-- URLが変わるから anchor 要素かな…
-- いや、JavaScriptでパスを書き換えているだけだから、別に画面遷移というわけではないか…
-- ほな、ボタンか…
-- トグルスイッチをボタンかぁ…
-- じゃあcheckbox を拡張するか…？
-- checkbox でスイッチ…
-- そうだ！checkbox switch
--->
-
 ---
 
-# `<input type="checkbox" switch>`
+## ブラウザサポート状況
+### Chrome 135のリリースでサポート
 
-`checkbox` に `switch` 属性を指定することで、スイッチUIを実現できる標準機能。
+- `::scroll-button()` と `::scroll-marker()`がChromeに実装された。
 
-<div grid="~ cols-2 gap-8">
-<div>
+> 参考：[New in Chrome 135](https://developer.chrome.com/blog/new-in-chrome-135?hl=ja)
 
-<div class="mt-4">
-  <input type="checkbox" id="lang" switch/>
-  <label for="lang">言語切り替え</label>
-</div>
+<br />
 
-```html
-<div>
-  <input type="checkbox" id="lang" switch />
-  <label for="lang">言語切り替え</label>
-</div>
-```
+### その他ブラウザ
 
-</div>
-<div>
-
-<v-clicks every="2">
-
-<div class="mt-4">
-  <input class="lang-switch" type="checkbox" id="lang-red" switch/>
-  <label for="lang-red">言語切り替え</label>
-</div>
-
-```html
-<div>
-  <input type="checkbox" id="lang" switch />
-  <label for="lang">言語切り替え</label>
-</div>
-<style>
-  input[type="checkbox"][switch] {
-    accent-color: red;
-  }
-</style>
-```
-
-</v-clicks>
-
-</div>
-</div>
-
-<style>
-.lang-switch {
-  accent-color: red;
-}
-</style>
-
-<!--
-と、いうことで、checkboxのswitch属性の紹介です。
-
-checkboxにswitch属性を指定することで、スイッチUIを実現できるブラウザの標準機能です。
-
-(こんな感じ)
-
-(→）
-
-標準機能なのでaccent-colorプロパティで色を変えたりもできます。
--->
-
----
-layout: quote
-transition: slide-up
-level: 2
----
-
-# やっぱり HTML 標準が考慮も<br>少なくなるし安心だよね😁
-
-<!--
-やっぱりHTML標準が考慮も少なくなるし安心だよね
--->
-
----
-layout: fact
----
-
-# がっ……駄目っ……!
-
-<!--
-が、だめ！
--->
-
----
-layout: image
-image: /images/wpt-switch.png
-backgroundSize: contain
----
-
-<span v-mark.underline.red="1" class="absolute top-25 left-65 w-62 h-1" aria-hidden="true"></span>
-
-<span v-mark.box.red="2" class="absolute top-68 right-2 w-40 h-50" aria-hidden="true"></span>
-
-<!--
-こちらWeb Platform Testsのダッシュボードのサイトで、ブラウザ機能のテスト状況を知ることができます。
-
-今見えているキャプチャは（→）checkboxのswitch属性のテストに関するページですが、
-(→)SafariしかテストをPassしていません。
-
-つまり、モダンブラウザで使用するにはまだ早すぎるということで別の実装方法を考えなければいけません。
--->
-
----
-layout: quote
-transition: slide-up
-level: 2
----
-
-# トグルスイッチをアクセシブルに実装するのはどうすれば<br>いいんだろう？🤔
-
-<!--
-では、トグルスイッチをアクセシブルに実装するにはどうすればいいんだろう。
--->
-
----
-layout: fact
----
-
-# そういうときはだいたいここ
-
-<!--
-そういうときはだいたいここをみます
--->
-
----
-transition: slide-up
-layout: image
-image: /images/apg.png
-backgroundSize: contain
----
-
-<div class="visually-hidden">ARIA Authoring Practices Guide トップページのスクリーンショットが背景画像に設定されている</div>
-<span v-mark.circle.red="1" class="absolute top-21 left-30 w-16 h-8" aria-hidden="true"></span>
-
-<!--
-ARIA Authoring Practices Guideです
-
-(→)
-
-ナビゲーションのPatternsから、switchのパターンがないか探してみます。
-
-そして、結論から言うと、
--->
-
----
-transition: slide-up
-layout: quote
----
-
-# ある
-
-<img class="mx-auto" src="/images/apg-ss-switch-card.png" alt="ARIA Authoring Practices GuideのPatternページに表示されているSwitchコンポーネントカードのスクリーンショット" >
-
-<!--
-あります。
--->
-
----
-transition: slide-up
-layout: quote
----
-
-# (サンプルコードも)ある
-
-<img class="mx-auto" src="/images/apg-ss-switch-examples.png" alt="ARIA Authoring Practices GuideのSwitch Patternページに表示されているExamplesのスクリーンショット" >
-
-<!--
-サンプルコードもあります。
--->
-
----
-layout: fact
----
-
-# (機能解説も)ある
-
-<!--
-解説もあります。
--->
-
----
-transition: slide-up
-layout: image
-image: /images/apg-ss-switch-feature.png
-backgroundSize: contain
----
-
-<div class="visually-hidden">ARIA Authoring Practices Guide Switch Examplesページのアクセシビリティ機能に関する説明のスクリーンショットが背景画像に設定されている</div>
-<span v-mark.underline.red="1" class="absolute top-25 left-150 w-54 h-1" aria-hidden="true"></span>
-<span v-mark.underline.red="1" class="absolute top-29 left-44 w-82 h-1" aria-hidden="true"></span>
-
-<span v-mark.underline.red="1" class="absolute top-38 left-44 w-162 h-1" aria-hidden="true"></span>
-<span v-mark.underline.red="1" class="absolute top-43 left-44 w-51 h-1" aria-hidden="true"></span>
-
-<span v-mark.underline.red="1" class="absolute top-48 left-44 w-162 h-1" aria-hidden="true"></span>
-<span v-mark.underline.red="1" class="absolute top-52 left-44 w-124 h-1" aria-hidden="true"></span>
-
-<span v-mark.underline.red="1" class="absolute top-77 left-44 w-162 h-1" aria-hidden="true"></span>
-<span v-mark.underline.red="1" class="absolute top-81 left-44 w-47 h-1" aria-hidden="true"></span>
-
-<!--
-今回こちらのswitchの例を参考に実装していきたいと思います。
-
-（→）
-
-例として、具体的にこのあたりを確認していきます。
--->
-
----
-
-# 意識したこと①
-
-<br>
-<dl>
-<dt class="text-indigo-700 mb-8 text-bold">
-視覚障害や認知障害を持つユーザーがスイッチの状態を理解しやすくするために、状態 (オンまたはオフ) に相当するテキストがグラフィカルな状態インジケーターの隣に表示されます。
-</dt>
-<v-clicks>
-<dd class="list-item ml-4 mb-2" v-motion :initial="{ x: -80 }" :enter="{ x: 0 }" :leave="{ x: 80 }">
-Example ではトグルスイッチのラベルが隣にあって、確かに判断しやすいけど、デザインフェーズの課題なのでスルーする。</dd>
-<dd class="list-item ml-4 mb-2" v-motion :initial="{ x: -80 }" :enter="{ x: 0 }" :leave="{ x: 80 }">実際は課題というより、今回のVueFesのデザインはラベルと一体化しているというものであるので、単純な（ラベルのない）トグルスイッチよりはわかりやすいと思う。</dd>
-<dd class="list-item ml-4 mb-2" v-motion :initial="{ x: -80 }" :enter="{ x: 0 }" :leave="{ x: 80 }">
-このような課題は、デザイン段階でアクセシブルかどうかのチェックが必要だから、デザインレビューであったり、アクセシビリティテストのシフトレフトが話題にあがったりするんだな、と感じた。</dd>
-</v-clicks>
-</dl>
-
-<!--
-意識したこと１です。
-
-視覚障害や認知障害を持つユーザーがスイッチの状態を理解しやすくするために、状態 (オンまたはオフ) に相当するテキストがグラフィカルな状態インジケーターの隣に表示されます。
-
-ちなみにgoogleの自動翻訳そのままなので日本語がへんなところがあります。
-
-（あとは一つずつ読む）
--->
-
----
-
-# 意識したこと②
-
-<br>
-<dl>
-<dt class="text-indigo-700 mb-8 text-bold">
-注:スクリーンリーダーによる状態の冗長なアナウンスを防ぐため、状態のテキストインジケーターはによって支援技術から非表示になっていますaria-hidden。
-</dt>
-<v-clicks>
-<dd class="list-item ml-4 mb-2" v-motion :initial="{ x: -80 }" :enter="{ x: 0 }" :leave="{ x: 80 }">
-たしかにラベルやチェック状態等を全部読み上げていたらわかりづらいかもしれない。
-</dd>
-<dd class="list-item ml-4 mb-2 text-red-700 text-bold" v-motion :initial="{ x: -80 }" :enter="{ x: 0 }" :leave="{ x: 80 }">
-トグルスイッチであることと、現在の状態が伝われば良い。
-</dd>
-</v-clicks>
-</dl>
-
-<!--
-意識したこと２です。
-
-注:スクリーンリーダーによる状態の冗長なアナウンスを防ぐため、状態のテキストインジケーターはによって支援技術から非表示になっていますaria-hidden。
-
-（一つずつ読む）
--->
-
----
-
-# 意識したこと③
-
-<br>
-<dl>
-<dt class="text-indigo-700 mb-8 text-bold">
-間隔、境界線の幅、塗りつぶしは、ブラウザやオペレーティングシステムの高コントラスト設定が有効になっている場合を含め、視覚障害のある人がグラフィックの状態を視認し、識別できるようにするために重要です。
-</dt>
-<v-clicks>
-<dd class="list-item ml-4 mb-2" v-motion :initial="{ x: -80 }" :enter="{ x: 0 }" :leave="{ x: 80 }">
-初期デザインでは、axeDevtools を実行したところ、コントラスト比に問題があった。
-</dd>
-<dd class="list-item ml-4 mb-2 text-red-700 text-bold" v-motion :initial="{ x: -80 }" :enter="{ x: 0 }" :leave="{ x: 80 }">
-デザイナに報告してなおしてもらった。
-</dd>
-</v-clicks>
-</dl>
-
-<!--
-意識したこと３です。
-
-間隔、境界線の幅、塗りつぶしは、ブラウザやオペレーティングシステムの高コントラスト設定が有効になっている場合を含め、視覚障害のある人がグラフィックの状態を視認し、識別できるようにするために重要です。
-
-（一つずつ読む）
--->
-
----
-
-# 意識したこと④
-
-<br>
-<dl>
-<dt class="text-indigo-700 mb-8 text-bold">
-スイッチを操作する際の認識性を高めるために、視覚的なキーボード フォーカスとホバーはCSS:hoverと:focus疑似クラスを使用してスタイル設定されます。
-</dt>
-<v-clicks>
-<dd class="list-item ml-4 mb-2" v-motion :initial="{ x: -80 }" :enter="{ x: 0 }" :leave="{ x: 80 }">
-Exampleページの機能に記載されている、スタイルの課題が全て解決しているわけではないが、少なくともホバー時とフォーカス時でスタイルを設定し、それぞれ認識できるようにはした。
-</dd>
-<dd class="list-item ml-4 mb-2" v-motion :initial="{ x: -80 }" :enter="{ x: 0 }" :leave="{ x: 80 }">
-実務でも、実装のタイミングで都度インタラクションの相談することはあるので、最初のデザイン段階で相談して詰めておきたいと、改めて思った。
-</dd>
-</v-clicks>
-</dl>
-
-<!--
-意識したこと４です。
-
-スイッチを操作する際の認識性を高めるために、視覚的なキーボード フォーカスとホバーはCSS:hoverと:focus疑似クラスを使用してスタイル設定されます。
-
-（一つずつ読む）
--->
-
----
-
-# 結果こうなった
-
-<div grid="~ cols-2 gap-8">
-<div>
-
-```html
-<button
-  type="button"
-  role="switch"
-  aria-label="translate english"
-  :aria-checked="isChecked"
-  @click="onSwitch"
->
-  ...
-</button>
-```
-
-</div>
-<div>
-
-<figure>
-<img src="/images/swich-aom.png" alt="switchコンポーネントのAOM" >
-</figure>
-
-</div>
-</div>
-
-<Arrow x1="210" y1="182" x2="530" y2="396" />
-<Arrow x1="330" y1="200" x2="550" y2="310" />
-<Arrow x1="300" y1="220" x2="530" y2="460" />
-
-<!--
-そして、これらを踏まえてこのような実装になりました。
-
-roleにはswitchを指定、aria-labelには"translate english"、aria-checkedにチェック状態を定義することで、現在の言語状態がわかるように実装しました。
--->
-
----
-
-# まとめ
-
-<v-clicks>
-
-- HTML標準要素ではないコンポーネントを開発する際に、ARIA Authoring Practices Guide (APG)を参考にした。
-  - 改めて見直すとまだ調整したいところがある。
-  - 自身の課題として、今後活かしていきたい。
-- <span class="text-bold">Vue Fes Japan 2024 は 2024/10/19 開催。チケット販売中。</span>
-  - このスライドも `Vue.js`で作成されています。
-
-</v-clicks>
-
-<div v-after class="mt-6">
-
-<h2 class="mb-4">参考</h2>
-
-- [ARIA Authoring Practices Guide (APG)](https://www.w3.org/WAI/ARIA/apg/)
-- [Vue Fes Japan 2024](https://vuefes.jp/2024/)
-
-</div>
-
-<!--
-まとめです。
-
-HTML標準要素ではないコンポーネントを開発する際に、ARIA Authoring Practices Guide (APG)を参考にしたという話をしました。
-改めて見直すとまだ調整したいところがありますが、自身の課題として、今後活かしていきたいです。 もしも、アンチパターンを踏んでいたり、よりよい実装方法にお気づきの方は、懇親会やX上でも教えて下さい。
-
-また冒頭でもお伝えしましたが、VueFesJapan2024は
-10月19日開催で、チケット販売中です。Vue.jsわからない方でもお祭り感楽しめると思いますし、なんならVue.js/Nuxtのハンズオンもあるので、Vue.js初心者の方でも楽しめるコンテンツがあります。
-このスライドもVue.jsで作成されています。
--->
+<iframe src="https://wpt.fyi/results/css/css-overflow?label=master&label=experimental&aligned&q=scroll-button" width="100%" height="300"></iframe>
 
 ---
 layout: statement
 class: text-center
 ---
 
-# ありがとうございました
+実装例
 
-<TheSwitch />
+---
 
-<PoweredBySlidev mt-10 />
+## 1. リストを作成する
+
+<div grid="~ cols-2 gap-8" class="mt-4">
+```html
+<ul>
+  <li>item 1</li>
+  <li>item 2</li>
+  <li>item 3</li>
+  <li>item 4</li>
+  <li>item 5</li>
+  <li>item 6</li>
+  <li>item 7</li>
+  <li>item 8</li>
+  <li>item 9</li>
+  <li>item 10</li>
+</ul>
+```
+<ul>
+  <li v-for="i in 10">
+    item {{ i }}
+  </li>
+</ul>
+</div>
+
+---
+
+## 2. アイテムを横並びにして横スクロールにする
+
+<div grid="~ cols-2 gap-8" class="mt-4">
+```html
+<div class="carousel">
+  <ul class="list">
+    <li>item 1</li>
+    <li>item 2</li>
+    <li>item 3</li>
+    <li>item 4</li>
+    <li>item 5</li>
+    <li>item 6</li>
+    <li>item 7</li>
+    <li>item 8</li>
+    <li>item 9</li>
+    <li>item 10</li>
+  </ul>
+</div>
+<style>
+.carousel {
+  overflow-x: auto;
+}
+.list {
+  display: flex;
+  li {
+    list-style-type:none;
+  }
+}
+</style>
+```
+<div class="flex flex-col">
+<div class="overflow-x-auto">
+  <ul class="flex">
+    <li v-for="i in 10" style="list-style-type:none" class="border">
+      item {{ i }}
+    </li>
+  </ul>
+</div>
+</div>
+</div>
+
+---
+
+## 3. スクロールボタンを追加する
+
+<div grid="~ cols-2 gap-8" class="mt-4">
+```html
+<div class="carousel" >
+  <ul class="list">
+    <li>item 1</li>
+    <li>item 2</li>
+    <li>item 3</li>
+    <li>item 4</li>
+    <li>item 5</li>
+    <li>item 6</li>
+    <li>item 7</li>
+    <li>item 8</li>
+    <li>item 9</li>
+    <li>item 10</li>
+  </ul>
+</div>
+<style>
+.carousel {
+  overflow-x: auto;
+  &::scroll-button(left) {
+    content: "←" / "Prev";
+  }
+  &::scroll-button(right) {
+    content: "→" / "Next";
+  }
+}
+.list {
+  display: flex;
+  li {
+    list-style-type:none;
+  }
+}
+</style>
+```
+<div class="flex flex-col">
+  <div>
+    <div class="carousel overflow-x-auto mb-4">
+      <ul class="flex">
+        <li v-for="i in 10" style="list-style-type:none" class="border">
+          item {{ i }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div>
+    <ul>
+      <li>overflowを定義している要素(今回でいえば<code>.carousel</code>)へ<code>::scroll-button()</code>疑似要素を定義する。</li>
+      <li><code>::scroll-button()</code>のセレクタにleftかrightを設定する。</li>
+      <li>
+        <code>::scroll-button()</code>疑似要素の<code>content</code>にボタンとして表示するコンテンツを設定
+        <ul><li>contentプロパティなので代替テキストを設定することも可能。</li></ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div>
+
+<style>
+.carousel {
+  &::scroll-button(left) {
+    content: "←" / "Prev";
+  }
+  &::scroll-button(right) {
+    content: "→" / "Next";
+  }
+}
+</style>
 
 <!--
-以上、ありがとうございました。
+left、rightは論理プロパティでも指定可能(inline-start, inline-end)
+disabledやfocus-visibleといった擬似クラスによるスタイリングも可能
 -->
+
+---
+
+## 4. スクロールマーカーを追加する
+
+<div grid="~ cols-2 gap-8" class="mt-4">
+```html
+<div class="carousel" >
+  <ul class="list">
+    <li>item 1</li>
+    <li>item 2</li>
+    <li>item 3</li>
+    <li>item 4</li>
+    <li>item 5</li>
+    <li>item 6</li>
+    <li>item 7</li>
+    <li>item 8</li>
+    <li>item 9</li>
+    <li>item 10</li>
+  </ul>
+</div>
+<style>
+.carousel {
+  overflow-x: auto;
+  &::scroll-button(left) {
+    content: "←" / "Prev";
+  }
+  &::scroll-button(right) {
+    content: "→" / "Next";
+  }
+  scroll-marker-group: after;
+  &::scroll-marker-group {
+    display: grid;
+    place-content: center;
+    grid-template-rows: 1rem;
+    grid-auto-columns: 1rem;
+    grid-auto-flow: column;
+    gap: .5rem;
+  }
+}
+.list {
+  display: flex;
+  li {
+    list-style-type:none;
+    &::scroll-marker {
+      content: " " / "Marker";
+      border: 1px solid red;
+      border-radius: 50%;
+      &:target-current {
+        background-color: blue;
+        border-color: blue;
+      }
+    }
+  }
+}
+</style>
+```
+<div class="flex flex-col">
+  <div>
+    <div class="carousel overflow-x-auto mb-4">
+      <ul class="flex list">
+        <li v-for="i in 10" class="border">
+          item {{ i }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div>
+    <ul>
+      <li><code>scroll-marker-group</code>でマーカーグループの位置を指定</li>
+      <li>
+        <code>::scroll-marker-group</code>と<code>::scroll-marker</code>それぞれにスタイルをあてる
+        <ul>
+          <li><code>::scroll-marker-group</code>はoverflow要素(今回でいえば<code>.carousel</code>)</li>
+          <li><code>::scroll-marker</code>はアイテム要素(今回でいえば<code>li</code>)</li>
+          <li><code>:target-current</code>擬似クラスで、現在表示中の状態のマーカースタイルも設定できる。</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div>
+
+<style>
+.carousel {
+  &::scroll-button(left) {
+    content: "←" / "Prev";
+  }
+  &::scroll-button(right) {
+    content: "→" / "Next";
+  }
+  scroll-marker-group: after;
+  &::scroll-marker-group {
+    display: grid;
+    place-content: center;
+    grid-template-rows: 1rem;
+    grid-auto-columns: 1rem;
+    grid-auto-flow: column;
+    gap: .5rem;
+  }
+}
+.list li{
+  flex-shrink: 0;
+  list-style-type: none;
+
+  &::scroll-marker {
+    content: " " / "Marker";
+    border: 1px solid red;
+    border-radius: 50%;
+    &:target-current {
+      background-color: blue;
+      border-color: blue;
+    }
+  }
+}
+</style>
+
+<!--
+scroll-marker-group</code>の子要素に<code>::scroll-marker</code>がいるわけではないのでflexではなくgridでスタイリングすることになると思います。
+-->
+
+---
+
+## 疑似要素のAOM確認
+
+- tabなのにMarkerがどのコンテンツとリンクしてるかわからん。
+- `::scroll-marker`と`::scroll-button`は`::before`, `::after`のような静的コンテンツではなく、インタラクティブ要素。
+  - インタラクティブならインタラクティブなりのアクセシビリティ要件がある。
+- AOMができる流れも説明したいけど割愛。今回のスクロールマーカーとスクロールボタンで擬似要素つくってスクリーンリーダーなどの支援技術にも公開される、だけ理解。
+- アクセシビリティツリー
+- `::scroll-marker-group`はrole tablistとして、`::scroll-marker`はrole tabとして公開されている。
+  - 但し、CSSの仕様としては存在していない。
+- アクセシビルな名前はcontentプロパティで指定する。ブラウザが自動的に設定するわけではないので、手動で設定する。
+- `::scroll-button`はもちろんrole button。同様にアクセシブルな名前をつける必要がある。
+
+## アクセシビリティ上の問題点
+
+- タブウィジェットのはず
+- でもtabpanelは存在しない
+  - `::scroll-marker`の元となる要素がtabpanelに変わるはず。
+  - でもそこ自動で書き換えるとulもlist roleではなくなる。
+- ARIAの仕様でアクティブなタブに対応するタブパネルがレンダリングされないといけない(MUST)
+- 気をつけないとtabのcontentはすべておなじnameになる
+- スクロールマーカーグループは複数選択にはなっていない(multiselectable属性がfalseになっている)
+  - 復数ならaia-selectedとaria-expandedを設定しないといけない
+- ボタンは非活性なのにアクセシビリティ情報上はそうなっていない
+- tabpanelだけはハードコーディングする必要がある
+
+> 参考：[Carousel Gallery](https://chrome.dev/carousel/)
+> 参考:[Are 'CSS Carousels' accessible?](https://www.sarasoueidan.com/blog/css-carousels-accessibility/)
+
+
+### タブウィジェットのアクセシビリティ要件
+
+- タブを作るにはtab, tabpanel, tablist ロールを使用する必要がある。
+
+#### ARIA 仕様
+
+- tab roleはtablistに含まれているか所有されていなければいけない
+- タブがアクティブな場合、tabpanelがレンダリングされていなければいけない
+- 単一選択が可能なタブリストの場合、ユーザーがタブパネルに関連付けられたタブを選択するまで、他のタブパネルを非表示にする必要がある(SHOULD)。
+- 複数選択可能なタブは、仕様上ではhy当時されているtabpanelのaria-expanded属性がtrueに設定されていること、そして非表示になっている残りのtabpanelのaria-expanded属性がfalseに設定されていること。
+- 選択されたタブはaria-selected属性がtrueに、非アクティブなタブ要素はfalseが設定されている必要がある(SHOULD)
+
+### タブの種類
+
+1. 自動的にアクティブ化されるタブ
+  - タブがフォーカスを受け取ると、自動的にアクティブ化され、そのパネルが表示される
+2. 手動でアクティブ化ｓるうタブ
+  - ユーザーがスペースキーまたはEnterキーを押すことでタブをアクティブ化し、そのパネルを表示する
+
+### Tabのキーボード操作要件
+
+- Tab キーを押して、フォカースがタブリストに移動すると、フォーカスはアクティブなタブ要素に移動する。
+- タブリストにフォーカスが含まれている場合、Tabキーを再度押すと、タブリストの外側のタブシーケンス内の次の要素にフォーカスが移動する。
+- フォーカスがタブリスト内にある場合
+  - 左カーソルキーで前のタブへ移動。フォーカスが最初のタブにある場合は最後のタブに移動
+  - 右カーソルキーで次のタブへ移動。フォーカスが最後のタブにある場合は最初のタブに移動
+
+
+## Overflow level5 仕様
+1. スクロールコンテナーにスクロールマーカーグループを作成
+2. グループ内の各スクロールマーカーがスクロールコンテナー内の項目に対応
+3. マーカーがコンテナー内のスクロール位置を示すようにスタイルの設定が可能
+
+## 仕組み
+- `::scroll-marker-group`疑似要素はスタイル可能な要素
+  - 暗黙的にフォーカス可能なfocusgroupとして定義される。
+  - スクロールマーカー間を移動するには矢印キーを使用する。
+  - radio groupのようなもの
+  - `::scroll-marker`疑似要素のコンテナ
+- `::scroll-marker`はリスト要素の先頭に追加されるが、支援技術にグループとして公開できるように、`::scroll-marker-group`へ収集される
+  - ブラウザがmarkerをgroupへ集約するように再配置している。
+  - DOM -> AOM
+---
+
+## おまけ
+
+Adam いないなった
+<!-- layout: iframe -->
+<!-- <iframe src="https://chrome.dev/carousel/" width="100%" height="500"></iframe> -->
+
+---
+
+## 🧱 ブラウザ対応と注意点
+- Chrome 135+ 対応
+- Safari/Firefoxは未対応（2025年5月時点）
+- Fallbackとの併用が必要な場合も
+
+---
+
+## ✅ まとめ
+- CSSだけでカルーセルを作れる時代がきた！
+- ::scroll-button() と ::scroll-marker() を使えばアクセシブルに！
+- まだ対応状況に注意しつつ、積極的に試してこ！
+
+---
+
+---
+
+## 🙌 Thank you！
+Slides: https://example.com/your-slides
+GitHub: https://github.com/your-name

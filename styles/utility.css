@@ -11,3 +11,13 @@
 .text-bold {
   font-weight: bold;
 }
+
+.slidev-code {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.scrollable-code pre {
+  max-height: 400px;
+  overflow-y: auto;
+}
